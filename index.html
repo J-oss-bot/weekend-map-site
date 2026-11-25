@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 
 <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
+name="viewport"
+content="width=device-width, initial-scale=1.0"
 >
 
 <title>周末目的地</title>
@@ -113,7 +113,9 @@ body {
     padding: 6px 9px;
     border-radius: 16px;
     white-space: nowrap;
-    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    box-shadow:
+        0 2px 6px
+        rgba(0,0,0,.25);
 }
 
 .destination-marker {
@@ -123,7 +125,9 @@ body {
     font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
-    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+    box-shadow:
+        0 2px 6px
+        rgba(0,0,0,.25);
 }
 
 .low-wind-marker {
@@ -134,7 +138,7 @@ body {
 }
 
 .info {
-    width: 270px;
+    width: 280px;
     padding: 4px;
 }
 
@@ -163,13 +167,41 @@ body {
     margin-top: 5px;
 }
 
-.route-btn {
+.aqi-good {
+    color: #169c46;
+    font-weight: 700;
+}
+
+.aqi-moderate {
+    color: #b28500;
+    font-weight: 700;
+}
+
+.aqi-unhealthy {
+    color: #df6518;
+    font-weight: 700;
+}
+
+.aqi-bad {
+    color: #d9363e;
+    font-weight: 700;
+}
+
+.aqi-severe {
+    color: #783899;
+    font-weight: 700;
+}
+
+.baidu-btn {
+    display: block;
     width: 100%;
     border: 0;
     border-radius: 6px;
     background: #1677ff;
     color: white;
-    padding: 9px;
+    text-decoration: none;
+    text-align: center;
+    padding: 10px;
     margin-top: 10px;
     cursor: pointer;
 }
@@ -197,15 +229,13 @@ body {
 
 window._AMapSecurityConfig = {
     securityJsCode:
-        "2869b5668b6143059ae236ede2e7512d
-"
+        "2869b5668b6143059ae236ede2e7512d"
 };
 
 </script>
 
 <script
-src="https://webapi.amap.com/maps?v=2.0&key=3fa1553aa1e54be7ecec2058966ce0fe
-&plugin=AMap.Driving">
+src="https://webapi.amap.com/maps?v=2.0&key=3fa1553aa1e54be7ecec2058966ce0fe">
 </script>
 
 </head>
@@ -221,9 +251,9 @@ src="https://webapi.amap.com/maps?v=2.0&key=3fa1553aa1e54be7ecec2058966ce0fe
     </div>
 
     <div class="subtitle">
-        🏠 宝山区淞南路111弄
+        🏠 出发地
         ｜📍 26 个地点
-        ｜🔄 2026-11-25 15:13
+        ｜🔄 2026-11-25 15:23
     </div>
 
     <div class="legend">
@@ -263,8 +293,8 @@ src="https://webapi.amap.com/maps?v=2.0&key=3fa1553aa1e54be7ecec2058966ce0fe
 
 <script>
 
-const origin = {"name": "家", "address": "上海市宝山区淞南路111弄", "lng": 121.493372, "lat": 31.340732, "weather": "阴", "temperature": 12, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"};
-const destinations = [{"id": "1", "name": "中成智谷", "city": "上海", "address": "上海市宝山区长江路258号", "lng": 121.496385, "lat": 31.349613, "distance_km": 2.3, "minutes": 8, "weather": "阴", "temperature": 11.98, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "2", "name": "上港星江湾", "city": "上海", "address": "上海市宝山区淞湾路128弄、188弄", "lng": 121.513051, "lat": 31.345231, "distance_km": 4.0, "minutes": 13, "weather": "阴", "temperature": 11.99, "wind_direction": "西风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "3", "name": "复旦大学新江湾校区", "city": "上海", "address": "上海市杨浦区淞沪路2005号", "lng": 121.505835, "lat": 31.337187, "distance_km": 5.4, "minutes": 17, "weather": "阴", "temperature": 12, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "4", "name": "新江湾城公园", "city": "上海", "address": "上海市杨浦区政和路与国秀路交叉口西北角", "lng": 121.513996, "lat": 31.332516, "distance_km": 4.9, "minutes": 15, "weather": "阴", "temperature": 12.01, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "5", "name": "复兴岛公园", "city": "上海", "address": "上海市杨浦区共青路386号", "lng": 121.562352, "lat": 31.286431, "distance_km": 13.6, "minutes": 21, "weather": "阴", "temperature": 12.07, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "6", "name": "和平公园", "city": "上海", "address": "上海市虹口区天宝路891号", "lng": 121.500629, "lat": 31.271596, "distance_km": 10.1, "minutes": 21, "weather": "阴", "temperature": 11.96, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "7", "name": "白沙公园", "city": "上海", "address": "上海市宝山区白沙园路601号", "lng": 121.437193, "lat": 31.395908, "distance_km": 13.9, "minutes": 26, "weather": "多云", "temperature": 11.97, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "8", "name": "双子山", "city": "上海", "address": "上海市浦东新区通耀路255号", "lng": 121.47891, "lat": 31.174594, "distance_km": 22.0, "minutes": 37, "weather": "阴", "temperature": 11.73, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "9", "name": "林间穿越", "city": "上海", "address": "上海市宝山区潘泾路2888号闻道园东门", "lng": 121.357812, "lat": 31.438691, "distance_km": 23.5, "minutes": 46, "weather": "多云", "temperature": 11.97, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "10", "name": "前滩休闲公园", "city": "上海", "address": "上海市浦东新区前滩大道506号", "lng": 121.468589, "lat": 31.150998, "distance_km": 25.5, "minutes": 45, "weather": "阴", "temperature": 11.69, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "11", "name": "共青森林公园", "city": "上海", "address": "上海市杨浦区军工路2000号", "lng": 121.550352, "lat": 31.319819, "distance_km": 10.2, "minutes": 23, "weather": "阴", "temperature": 12.07, "wind_direction": "西风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "12", "name": "滨江森林公园二期儿童游乐场", "city": "上海", "address": "上海市浦东新区崇景路9号", "lng": 121.517682, "lat": 31.376768, "distance_km": 9.7, "minutes": 19, "weather": "阴", "temperature": 11.98, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "13", "name": "武松炮台湾湿地公园", "city": "上海", "address": "上海市宝山区塘后路206号", "lng": 121.506409, "lat": 31.39389, "distance_km": 8.1, "minutes": 21, "weather": "阴", "temperature": 11.95, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "14", "name": "玻璃博物馆", "city": "上海", "address": "上海市宝山区长江西路685号", "lng": 121.472233, "lat": 31.343926, "distance_km": 3.4, "minutes": 11, "weather": "阴", "temperature": 12.02, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "15", "name": "世界技能博物馆", "city": "上海", "address": "上海市杨浦区安浦路389号", "lng": 121.534716, "lat": 31.252084, "distance_km": 17.4, "minutes": 30, "weather": "阴", "temperature": 11.94, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "16", "name": "上博东馆", "city": "上海", "address": "上海市浦东新区世纪大道1952号", "lng": 121.540834, "lat": 31.219286, "distance_km": 24.2, "minutes": 33, "weather": "阴", "temperature": 11.86, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "17", "name": "隧道博物馆", "city": "上海", "address": "上海市黄浦区中华路268号", "lng": 121.49927, "lat": 31.221356, "distance_km": 15.9, "minutes": 32, "weather": "阴", "temperature": 11.84, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "18", "name": "宝山民间艺术博览馆", "city": "上海", "address": "上海市宝山区沪太路4788号", "lng": 121.385189, "lat": 31.344728, "distance_km": 16.7, "minutes": 30, "weather": "阴", "temperature": 12.09, "wind_direction": "西南风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "19", "name": "宝杨宝龙", "city": "上海", "address": "上海市宝山区同济路669弄", "lng": 121.481762, "lat": 31.395345, "distance_km": 8.4, "minutes": 19, "weather": "阴", "temperature": 11.94, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "20", "name": "太阳宫", "city": "上海", "address": "上海市虹口区瑞虹路181号", "lng": 121.498709, "lat": 31.263219, "distance_km": 10.5, "minutes": 23, "weather": "阴", "temperature": 11.93, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "21", "name": "迪卡侬+创智天地", "city": "上海", "address": "上海市杨浦区淞沪路234号创智天地1号楼B1层", "lng": 121.513338, "lat": 31.305177, "distance_km": 8.2, "minutes": 20, "weather": "阴", "temperature": 12.03, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "22", "name": "五角场商圈+大学路", "city": "上海", "address": "上海市杨浦区大学路", "lng": 121.508141, "lat": 31.30337, "distance_km": 7.6, "minutes": 17, "weather": "阴", "temperature": 12.04, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "23", "name": "宝山滨江+海上世界", "city": "上海", "address": "上海市宝山区吴淞口路60号", "lng": 121.502298, "lat": 31.404621, "distance_km": 10.5, "minutes": 22, "weather": "阴", "temperature": 11.93, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "24", "name": "森兰绿地+森兰花园城", "city": "上海", "address": "上海市浦东新区洲海路与兰谷路交叉口", "lng": 121.598368, "lat": 31.316378, "distance_km": 20.5, "minutes": 24, "weather": "阴", "temperature": 12.13, "wind_direction": "西风", "wind_scale": 2, "weather_time": "15:00"}, {"id": "25", "name": "虹口滨江+白玉兰广场", "city": "上海", "address": "上海市虹口区东长治路588号", "lng": 121.497759, "lat": 31.248918, "distance_km": 12.7, "minutes": 30, "weather": "阴", "temperature": 11.91, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}, {"id": "26", "name": "杨浦滨江+东方渔人码头", "city": "上海", "address": "上海市杨浦区江浦路与杨树浦路交汇处", "lng": 121.531797, "lat": 31.253073, "distance_km": 17.1, "minutes": 28, "weather": "阴", "temperature": 11.94, "wind_direction": "西风", "wind_scale": 1, "weather_time": "15:00"}];
+const origin = {"name": "家", "address": "上海市宝山区淞南路111弄", "lng": 121.493372, "lat": 31.340732, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 70, "aqi_level": "良", "pm25": 45};
+const destinations = [{"id": "1", "name": "中成智谷", "city": "上海", "address": "上海市宝山区长江路258号", "lng": 121.496385, "lat": 31.349613, "distance_km": 2.3, "minutes": 9, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 70, "aqi_level": "良", "pm25": 45}, {"id": "2", "name": "上港星江湾", "city": "上海", "address": "上海市宝山区淞湾路128弄、188弄", "lng": 121.513051, "lat": 31.345231, "distance_km": 4.0, "minutes": 12, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 70, "aqi_level": "良", "pm25": 45}, {"id": "3", "name": "复旦大学新江湾校区", "city": "上海", "address": "上海市杨浦区淞沪路2005号", "lng": 121.505835, "lat": 31.337187, "distance_km": 5.4, "minutes": 16, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 70, "aqi_level": "良", "pm25": 45}, {"id": "4", "name": "新江湾城公园", "city": "上海", "address": "上海市杨浦区政和路与国秀路交叉口西北角", "lng": 121.513996, "lat": 31.332516, "distance_km": 4.9, "minutes": 15, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 70, "aqi_level": "良", "pm25": 45}, {"id": "5", "name": "复兴岛公园", "city": "上海", "address": "上海市杨浦区共青路386号", "lng": 121.562352, "lat": 31.286431, "distance_km": 13.6, "minutes": 21, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 73, "aqi_level": "良", "pm25": 46}, {"id": "6", "name": "和平公园", "city": "上海", "address": "上海市虹口区天宝路891号", "lng": 121.500629, "lat": 31.271596, "distance_km": 10.1, "minutes": 20, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 68, "aqi_level": "良", "pm25": 44}, {"id": "7", "name": "白沙公园", "city": "上海", "address": "上海市宝山区白沙园路601号", "lng": 121.437193, "lat": 31.395908, "distance_km": 13.9, "minutes": 26, "weather": "多云", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 68, "aqi_level": "良", "pm25": 44}, {"id": "8", "name": "双子山", "city": "上海", "address": "上海市浦东新区通耀路255号", "lng": 121.47891, "lat": 31.174594, "distance_km": 22.0, "minutes": 37, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 68, "aqi_level": "良", "pm25": 44}, {"id": "9", "name": "林间穿越", "city": "上海", "address": "上海市宝山区潘泾路2888号闻道园东门", "lng": 121.357812, "lat": 31.438691, "distance_km": 23.5, "minutes": 47, "weather": "多云", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 63, "aqi_level": "良", "pm25": 41}, {"id": "10", "name": "前滩休闲公园", "city": "上海", "address": "上海市浦东新区前滩大道506号", "lng": 121.468589, "lat": 31.150998, "distance_km": 25.5, "minutes": 46, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 67, "aqi_level": "良", "pm25": 43}, {"id": "11", "name": "共青森林公园", "city": "上海", "address": "上海市杨浦区军工路2000号", "lng": 121.550352, "lat": 31.319819, "distance_km": 10.2, "minutes": 23, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 70, "aqi_level": "良", "pm25": 45}, {"id": "12", "name": "滨江森林公园二期儿童游乐场", "city": "上海", "address": "上海市浦东新区崇景路9号", "lng": 121.517682, "lat": 31.376768, "distance_km": 9.7, "minutes": 19, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 68, "aqi_level": "良", "pm25": 44}, {"id": "13", "name": "武松炮台湾湿地公园", "city": "上海", "address": "上海市宝山区塘后路206号", "lng": 121.506409, "lat": 31.39389, "distance_km": 8.1, "minutes": 21, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 68, "aqi_level": "良", "pm25": 44}, {"id": "14", "name": "玻璃博物馆", "city": "上海", "address": "上海市宝山区长江西路685号", "lng": 121.472233, "lat": 31.343926, "distance_km": 3.4, "minutes": 11, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 70, "aqi_level": "良", "pm25": 45}, {"id": "15", "name": "世界技能博物馆", "city": "上海", "address": "上海市杨浦区安浦路389号", "lng": 121.534716, "lat": 31.252084, "distance_km": 17.4, "minutes": 30, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 69, "aqi_level": "良", "pm25": 44}, {"id": "16", "name": "上博东馆", "city": "上海", "address": "上海市浦东新区世纪大道1952号", "lng": 121.540834, "lat": 31.219286, "distance_km": 24.2, "minutes": 33, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 71, "aqi_level": "良", "pm25": 45}, {"id": "17", "name": "隧道博物馆", "city": "上海", "address": "上海市黄浦区中华路268号", "lng": 121.49927, "lat": 31.221356, "distance_km": 15.9, "minutes": 32, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 69, "aqi_level": "良", "pm25": 44}, {"id": "18", "name": "宝山民间艺术博览馆", "city": "上海", "address": "上海市宝山区沪太路4788号", "lng": 121.385189, "lat": 31.344728, "distance_km": 16.7, "minutes": 31, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 62, "aqi_level": "良", "pm25": 41}, {"id": "19", "name": "宝杨宝龙", "city": "上海", "address": "上海市宝山区同济路669弄", "lng": 121.481762, "lat": 31.395345, "distance_km": 8.4, "minutes": 19, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 68, "aqi_level": "良", "pm25": 44}, {"id": "20", "name": "太阳宫", "city": "上海", "address": "上海市虹口区瑞虹路181号", "lng": 121.498709, "lat": 31.263219, "distance_km": 10.5, "minutes": 22, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 69, "aqi_level": "良", "pm25": 44}, {"id": "21", "name": "迪卡侬+创智天地", "city": "上海", "address": "上海市杨浦区淞沪路234号创智天地1号楼B1层", "lng": 121.513338, "lat": 31.305177, "distance_km": 8.2, "minutes": 19, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 70, "aqi_level": "良", "pm25": 45}, {"id": "22", "name": "五角场商圈+大学路", "city": "上海", "address": "上海市杨浦区大学路", "lng": 121.508141, "lat": 31.30337, "distance_km": 7.6, "minutes": 17, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 69, "aqi_level": "良", "pm25": 44}, {"id": "23", "name": "宝山滨江+海上世界", "city": "上海", "address": "上海市宝山区吴淞口路60号", "lng": 121.502298, "lat": 31.404621, "distance_km": 10.5, "minutes": 23, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 68, "aqi_level": "良", "pm25": 44}, {"id": "24", "name": "森兰绿地+森兰花园城", "city": "上海", "address": "上海市浦东新区洲海路与兰谷路交叉口", "lng": 121.598368, "lat": 31.316378, "distance_km": 20.5, "minutes": 24, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 71, "aqi_level": "良", "pm25": 46}, {"id": "25", "name": "虹口滨江+白玉兰广场", "city": "上海", "address": "上海市虹口区东长治路588号", "lng": 121.497759, "lat": 31.248918, "distance_km": 12.7, "minutes": 30, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 69, "aqi_level": "良", "pm25": 44}, {"id": "26", "name": "杨浦滨江+东方渔人码头", "city": "上海", "address": "上海市杨浦区江浦路与杨树浦路交汇处", "lng": 121.531797, "lat": 31.253073, "distance_km": 17.1, "minutes": 28, "weather": "阴", "temperature": 12, "wind_direction": "西南风", "wind_scale": 2, "weather_time": "15:15", "aqi": 69, "aqi_level": "良", "pm25": 44}];
 
 const map = new AMap.Map(
     "map",
@@ -301,6 +331,64 @@ function getColor(minutes) {
     }
 
     return "#d64545";
+}
+
+
+function getAqiClass(aqi) {
+
+    if (
+        aqi === null
+        || aqi === undefined
+    ) {
+        return "";
+    }
+
+    if (aqi <= 50) {
+        return "aqi-good";
+    }
+
+    if (aqi <= 100) {
+        return "aqi-moderate";
+    }
+
+    if (aqi <= 150) {
+        return "aqi-unhealthy";
+    }
+
+    if (aqi <= 200) {
+        return "aqi-bad";
+    }
+
+    return "aqi-severe";
+}
+
+
+function buildBaiduUrl(item) {
+
+    const originText =
+        encodeURIComponent(
+            "上海市宝山区淞南路111弄"
+        );
+
+    const destinationText =
+        encodeURIComponent(
+            item.city
+            + item.address
+            + " "
+            + item.name
+        );
+
+    return (
+        "https://api.map.baidu.com/direction"
+        + "?origin="
+        + originText
+        + "&destination="
+        + destinationText
+        + "&mode=driving"
+        + "&region=上海"
+        + "&output=html"
+        + "&src=weekend-map"
+    );
 }
 
 
@@ -346,10 +434,26 @@ homeMarker.on(
               + "级"
             : "暂无";
 
+        const aqiText =
+            origin.aqi !== null
+            ? "AQI "
+              + origin.aqi
+              + " "
+              + origin.aqi_level
+            : "AQI 暂无";
+
+        const pm25Text =
+            origin.pm25 !== null
+            ? origin.pm25 + " μg/m³"
+            : "暂无";
+
+        const aqiClass =
+            getAqiClass(origin.aqi);
+
         const content =
             '<div class="info">'
             + '<div class="info-title">'
-            + '🏠 淞南路111弄'
+            + '🏠 家'
             + '</div>'
             + '<div class="weather-box">'
             + '<div class="info-row">'
@@ -361,6 +465,16 @@ homeMarker.on(
             + '<div class="info-row">'
             + '💨 '
             + windText
+            + '</div>'
+            + '<div class="info-row '
+            + aqiClass
+            + '">'
+            + '🌫 '
+            + aqiText
+            + '</div>'
+            + '<div class="info-row">'
+            + 'PM2.5：'
+            + pm25Text
             + '</div>'
             + '<div class="weather-time">'
             + '实时数据：'
@@ -381,31 +495,6 @@ homeMarker.on(
 
 
 map.add(homeMarker);
-
-
-const driving = new AMap.Driving({
-    map: map,
-    hideMarkers: true,
-    showTraffic: true
-});
-
-
-function showRoute(lng, lat) {
-
-    driving.clear();
-
-    driving.search(
-        new AMap.LngLat(
-            origin.lng,
-            origin.lat
-        ),
-        new AMap.LngLat(
-            lng,
-            lat
-        )
-    );
-
-}
 
 
 const markers = [];
@@ -492,6 +581,26 @@ destinations.forEach(
                       + "级"
                     : "暂无";
 
+                const aqiText =
+                    item.aqi !== null
+                    ? "AQI "
+                      + item.aqi
+                      + " "
+                      + item.aqi_level
+                    : "AQI 暂无";
+
+                const pm25Text =
+                    item.pm25 !== null
+                    ? item.pm25
+                      + " μg/m³"
+                    : "暂无";
+
+                const aqiClass =
+                    getAqiClass(item.aqi);
+
+                const baiduUrl =
+                    buildBaiduUrl(item);
+
                 const content =
                     '<div class="info">'
                     + '<div class="info-title">'
@@ -520,19 +629,28 @@ destinations.forEach(
                     + '💨 '
                     + windText
                     + '</div>'
+                    + '<div class="info-row '
+                    + aqiClass
+                    + '">'
+                    + '🌫 '
+                    + aqiText
+                    + '</div>'
+                    + '<div class="info-row">'
+                    + 'PM2.5：'
+                    + pm25Text
+                    + '</div>'
                     + '<div class="weather-time">'
                     + '实时数据：'
                     + item.weather_time
                     + '</div>'
                     + '</div>'
-                    + '<button class="route-btn" '
-                    + 'onclick="showRoute('
-                    + item.lng
-                    + ','
-                    + item.lat
-                    + ')">'
-                    + '显示驾车路线'
-                    + '</button>'
+                    + '<a class="baidu-btn" '
+                    + 'href="'
+                    + baiduUrl
+                    + '" target="_blank" '
+                    + 'rel="noopener">'
+                    + '打开百度地图路线'
+                    + '</a>'
                     + '</div>';
 
                 infoWindow.setContent(content);
