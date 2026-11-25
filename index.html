@@ -1,0 +1,577 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>周末目的地</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Microsoft YaHei",
+        sans-serif;
+}
+
+#app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    background: white;
+    padding: 11px 15px;
+    border-bottom: 1px solid #ddd;
+    z-index: 10;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: #666;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 7px;
+    font-size: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+
+.green {
+    background: #35a853;
+}
+
+.blue {
+    background: #1677ff;
+}
+
+.yellow {
+    background: #e5a41a;
+}
+
+.red {
+    background: #d64545;
+}
+
+.wind-demo {
+    display: inline-block;
+    width: 25px;
+    height: 16px;
+    border-radius: 10px;
+    background: #35a853;
+    border: 3px solid white;
+    box-shadow: 0 0 0 1px #777;
+}
+
+#map {
+    flex: 1;
+    min-height: 400px;
+}
+
+.home-marker {
+    background: #7b61ff;
+    color: white;
+    padding: 6px 9px;
+    border-radius: 16px;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+
+.destination-marker {
+    color: white;
+    padding: 5px 8px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0,0,0,.25);
+}
+
+.low-wind-marker {
+    border: 3px solid white;
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,.4),
+        0 2px 7px rgba(0,0,0,.35);
+}
+
+.info {
+    width: 270px;
+    padding: 4px;
+}
+
+.info-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.info-row {
+    font-size: 14px;
+    margin: 6px 0;
+    line-height: 1.4;
+}
+
+.weather-box {
+    margin-top: 8px;
+    background: #f4f7fb;
+    padding: 9px;
+    border-radius: 7px;
+}
+
+.weather-time {
+    font-size: 11px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.route-btn {
+    width: 100%;
+    border: 0;
+    border-radius: 6px;
+    background: #1677ff;
+    color: white;
+    padding: 9px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 600px) {
+
+    .header {
+        padding: 9px 11px;
+    }
+
+    .title {
+        font-size: 18px;
+    }
+
+    .legend {
+        gap: 7px;
+        font-size: 11px;
+    }
+
+}
+
+</style>
+
+<script>
+
+window._AMapSecurityConfig = {
+    securityJsCode:
+        "2869b5668b6143059ae236ede2e7512d
+"
+};
+
+</script>
+
+<script
+src="https://webapi.amap.com/maps?v=2.0&key=3fa1553aa1e54be7ecec2058966ce0fe
+&plugin=AMap.Driving">
+</script>
+
+</head>
+
+<body>
+
+<div id="app">
+
+<div class="header">
+
+    <div class="title">
+        周末目的地
+    </div>
+
+    <div class="subtitle">
+        🏠 宝山区淞南路111弄
+        ｜📍 26 个地点
+        ｜🔄 2026-11-25 14:53
+    </div>
+
+    <div class="legend">
+
+        <div class="legend-item">
+            <div class="dot green"></div>
+            ≤20分钟
+        </div>
+
+        <div class="legend-item">
+            <div class="dot blue"></div>
+            21–30分钟
+        </div>
+
+        <div class="legend-item">
+            <div class="dot yellow"></div>
+            31–60分钟
+        </div>
+
+        <div class="legend-item">
+            <div class="dot red"></div>
+            &gt;60分钟
+        </div>
+
+        <div class="legend-item">
+            <span class="wind-demo"></span>
+            白框＝和风≤2级
+        </div>
+
+    </div>
+
+</div>
+
+<div id="map"></div>
+
+</div>
+
+<script>
+
+const origin = {"name": "家", "address": "上海市宝山区淞南路111弄", "lng": 121.493372, "lat": 31.340732, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""};
+const destinations = [{"id": "1", "name": "中成智谷", "city": "上海", "address": "上海市宝山区长江路258号", "lng": 121.496385, "lat": 31.349613, "distance_km": 2.3, "minutes": 9, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "2", "name": "上港星江湾", "city": "上海", "address": "上海市宝山区淞湾路128弄、188弄", "lng": 121.513051, "lat": 31.345231, "distance_km": 4.0, "minutes": 12, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "3", "name": "复旦大学新江湾校区", "city": "上海", "address": "上海市杨浦区淞沪路2005号", "lng": 121.505835, "lat": 31.337187, "distance_km": 5.4, "minutes": 16, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "4", "name": "新江湾城公园", "city": "上海", "address": "上海市杨浦区政和路与国秀路交叉口西北角", "lng": 121.513996, "lat": 31.332516, "distance_km": 4.9, "minutes": 14, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "5", "name": "复兴岛公园", "city": "上海", "address": "上海市杨浦区共青路386号", "lng": 121.562352, "lat": 31.286431, "distance_km": 13.6, "minutes": 21, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "6", "name": "和平公园", "city": "上海", "address": "上海市虹口区天宝路891号", "lng": 121.500629, "lat": 31.271596, "distance_km": 10.1, "minutes": 20, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "7", "name": "白沙公园", "city": "上海", "address": "上海市宝山区白沙园路601号", "lng": 121.437193, "lat": 31.395908, "distance_km": 13.9, "minutes": 25, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "8", "name": "双子山", "city": "上海", "address": "上海市浦东新区通耀路255号", "lng": 121.47891, "lat": 31.174594, "distance_km": 22.0, "minutes": 35, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "9", "name": "林间穿越", "city": "上海", "address": "上海市宝山区潘泾路2888号闻道园东门", "lng": 121.357812, "lat": 31.438691, "distance_km": 23.5, "minutes": 45, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "10", "name": "前滩休闲公园", "city": "上海", "address": "上海市浦东新区前滩大道506号", "lng": 121.468589, "lat": 31.150998, "distance_km": 25.5, "minutes": 43, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "11", "name": "共青森林公园", "city": "上海", "address": "上海市杨浦区军工路2000号", "lng": 121.550352, "lat": 31.319819, "distance_km": 10.2, "minutes": 23, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "12", "name": "滨江森林公园二期儿童游乐场", "city": "上海", "address": "上海市浦东新区崇景路9号", "lng": 121.517682, "lat": 31.376768, "distance_km": 9.7, "minutes": 19, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "13", "name": "武松炮台湾湿地公园", "city": "上海", "address": "上海市宝山区塘后路206号", "lng": 121.506409, "lat": 31.39389, "distance_km": 8.1, "minutes": 20, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "14", "name": "玻璃博物馆", "city": "上海", "address": "上海市宝山区长江西路685号", "lng": 121.472233, "lat": 31.343926, "distance_km": 3.4, "minutes": 10, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "15", "name": "世界技能博物馆", "city": "上海", "address": "上海市杨浦区安浦路389号", "lng": 121.534716, "lat": 31.252084, "distance_km": 17.4, "minutes": 29, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "16", "name": "上博东馆", "city": "上海", "address": "上海市浦东新区世纪大道1952号", "lng": 121.540834, "lat": 31.219286, "distance_km": 24.2, "minutes": 35, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "17", "name": "隧道博物馆", "city": "上海", "address": "上海市黄浦区中华路268号", "lng": 121.49927, "lat": 31.221356, "distance_km": 15.9, "minutes": 31, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "18", "name": "宝山民间艺术博览馆", "city": "上海", "address": "上海市宝山区沪太路4788号", "lng": 121.385189, "lat": 31.344728, "distance_km": 16.7, "minutes": 27, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "19", "name": "宝杨宝龙", "city": "上海", "address": "上海市宝山区同济路669弄", "lng": 121.481762, "lat": 31.395345, "distance_km": 8.4, "minutes": 18, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "20", "name": "太阳宫", "city": "上海", "address": "上海市虹口区瑞虹路181号", "lng": 121.498709, "lat": 31.263219, "distance_km": 10.5, "minutes": 22, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "21", "name": "迪卡侬+创智天地", "city": "上海", "address": "上海市杨浦区淞沪路234号创智天地1号楼B1层", "lng": 121.513338, "lat": 31.305177, "distance_km": 8.2, "minutes": 20, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "22", "name": "五角场商圈+大学路", "city": "上海", "address": "上海市杨浦区大学路", "lng": 121.508141, "lat": 31.30337, "distance_km": 7.6, "minutes": 17, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "23", "name": "宝山滨江+海上世界", "city": "上海", "address": "上海市宝山区吴淞口路60号", "lng": 121.502298, "lat": 31.404621, "distance_km": 10.5, "minutes": 21, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "24", "name": "森兰绿地+森兰花园城", "city": "上海", "address": "上海市浦东新区洲海路与兰谷路交叉口", "lng": 121.598368, "lat": 31.316378, "distance_km": 20.5, "minutes": 24, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "25", "name": "虹口滨江+白玉兰广场", "city": "上海", "address": "上海市虹口区东长治路588号", "lng": 121.497759, "lat": 31.248918, "distance_km": 12.7, "minutes": 30, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}, {"id": "26", "name": "杨浦滨江+东方渔人码头", "city": "上海", "address": "上海市杨浦区江浦路与杨树浦路交汇处", "lng": 121.531797, "lat": 31.253073, "distance_km": 17.1, "minutes": 28, "weather": "", "temperature": null, "wind_direction": "", "wind_scale": null, "weather_time": ""}];
+
+const map = new AMap.Map(
+    "map",
+    {
+        zoom: 11,
+        center: [
+            origin.lng,
+            origin.lat
+        ],
+        resizeEnable: true
+    }
+);
+
+
+function getColor(minutes) {
+
+    if (
+        minutes === null
+        || minutes === undefined
+    ) {
+        return "#777777";
+    }
+
+    if (minutes <= 20) {
+        return "#35a853";
+    }
+
+    if (minutes <= 30) {
+        return "#1677ff";
+    }
+
+    if (minutes <= 60) {
+        return "#e5a41a";
+    }
+
+    return "#d64545";
+}
+
+
+const infoWindow = new AMap.InfoWindow({
+    offset: new AMap.Pixel(0, -20)
+});
+
+
+const homeMarker = new AMap.Marker({
+
+    position: [
+        origin.lng,
+        origin.lat
+    ],
+
+    content:
+        '<div class="home-marker">'
+        + '🏠 家'
+        + '</div>',
+
+    offset:
+        new AMap.Pixel(-20, -15),
+
+    zIndex: 300
+
+});
+
+
+homeMarker.on(
+    "click",
+    function() {
+
+        const tempText =
+            origin.temperature !== null
+            ? origin.temperature + "℃"
+            : "暂无";
+
+        const windText =
+            origin.wind_scale !== null
+            ? origin.wind_direction
+              + " "
+              + origin.wind_scale
+              + "级"
+            : "暂无";
+
+        const content =
+            '<div class="info">'
+            + '<div class="info-title">'
+            + '🏠 淞南路111弄'
+            + '</div>'
+            + '<div class="weather-box">'
+            + '<div class="info-row">'
+            + '🌤 '
+            + origin.weather
+            + '　'
+            + tempText
+            + '</div>'
+            + '<div class="info-row">'
+            + '💨 '
+            + windText
+            + '</div>'
+            + '<div class="weather-time">'
+            + '实时数据：'
+            + origin.weather_time
+            + '</div>'
+            + '</div>'
+            + '</div>';
+
+        infoWindow.setContent(content);
+
+        infoWindow.open(
+            map,
+            homeMarker.getPosition()
+        );
+
+    }
+);
+
+
+map.add(homeMarker);
+
+
+const driving = new AMap.Driving({
+    map: map,
+    hideMarkers: true,
+    showTraffic: true
+});
+
+
+function showRoute(lng, lat) {
+
+    driving.clear();
+
+    driving.search(
+        new AMap.LngLat(
+            origin.lng,
+            origin.lat
+        ),
+        new AMap.LngLat(
+            lng,
+            lat
+        )
+    );
+
+}
+
+
+const markers = [];
+
+
+destinations.forEach(
+    function(item) {
+
+        if (
+            item.lng === null
+            || item.lat === null
+        ) {
+            return;
+        }
+
+        const color =
+            getColor(item.minutes);
+
+        const minuteText =
+            item.minutes !== null
+            ? item.minutes + " min"
+            : "暂无";
+
+        const lowWind =
+            item.wind_scale !== null
+            && item.wind_scale <= 2;
+
+        const markerClass =
+            lowWind
+            ? "destination-marker low-wind-marker"
+            : "destination-marker";
+
+        const marker = new AMap.Marker({
+
+            position: [
+                item.lng,
+                item.lat
+            ],
+
+            content:
+                '<div class="'
+                + markerClass
+                + '" style="background:'
+                + color
+                + ';">'
+                + minuteText
+                + '</div>',
+
+            offset:
+                new AMap.Pixel(-22, -15),
+
+            zIndex:
+                lowWind
+                ? 150
+                : 100
+
+        });
+
+
+        marker.on(
+            "click",
+            function() {
+
+                const driveText =
+                    item.minutes !== null
+                    ? item.minutes + " 分钟"
+                    : "暂无";
+
+                const distanceText =
+                    item.distance_km !== null
+                    ? item.distance_km + " km"
+                    : "暂无";
+
+                const tempText =
+                    item.temperature !== null
+                    ? item.temperature + "℃"
+                    : "暂无";
+
+                const windText =
+                    item.wind_scale !== null
+                    ? item.wind_direction
+                      + " "
+                      + item.wind_scale
+                      + "级"
+                    : "暂无";
+
+                const content =
+                    '<div class="info">'
+                    + '<div class="info-title">'
+                    + item.name
+                    + '</div>'
+                    + '<div class="info-row">'
+                    + '📍 '
+                    + item.address
+                    + '</div>'
+                    + '<div class="info-row">'
+                    + '🚗 当前车程：'
+                    + driveText
+                    + '</div>'
+                    + '<div class="info-row">'
+                    + '📏 距离：'
+                    + distanceText
+                    + '</div>'
+                    + '<div class="weather-box">'
+                    + '<div class="info-row">'
+                    + '🌤 '
+                    + item.weather
+                    + '　'
+                    + tempText
+                    + '</div>'
+                    + '<div class="info-row">'
+                    + '💨 '
+                    + windText
+                    + '</div>'
+                    + '<div class="weather-time">'
+                    + '实时数据：'
+                    + item.weather_time
+                    + '</div>'
+                    + '</div>'
+                    + '<button class="route-btn" '
+                    + 'onclick="showRoute('
+                    + item.lng
+                    + ','
+                    + item.lat
+                    + ')">'
+                    + '显示驾车路线'
+                    + '</button>'
+                    + '</div>';
+
+                infoWindow.setContent(content);
+
+                infoWindow.open(
+                    map,
+                    marker.getPosition()
+                );
+
+            }
+        );
+
+
+        map.add(marker);
+        markers.push(marker);
+
+    }
+);
+
+
+if (markers.length > 0) {
+
+    map.setFitView(
+        [
+            homeMarker,
+            ...markers
+        ],
+        false,
+        [
+            60,
+            60,
+            60,
+            60
+        ]
+    );
+
+}
+
+</script>
+
+</body>
+</html>
